@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {data, image,images} from './Carousel';
-import axios from 'node_modules/axios';
+// import axios from 'node_modules/axios';
 import {
   Text,
   View,
@@ -34,9 +34,9 @@ function HomeScreen({navigation}) {
     //     firstParam: 'yourValue'
     //   })
     // });
-    axios.get('https://gwapi.zee5.com/content/tvshow/?season_id=0-2-3337&type=episode&translation=en&country=IN&on_air=true&asset_subtype=tvshow&page=0&limit=10',).then((data)=>{
-      console.log(JSON.stringify(data))
-    });
+    // axios.get('https://gwapi.zee5.com/content/tvshow/?season_id=0-2-3337&type=episode&translation=en&country=IN&on_air=true&asset_subtype=tvshow&page=0&limit=10',).then((data)=>{
+    //   console.log(JSON.stringify(data))
+    // });
   }, [])
   const renderItem = ({item}) => {
     return (
@@ -122,8 +122,35 @@ function HomeScreen({navigation}) {
               </ScrollView>
             </View>
           </View>
-          
+          <View style={[styles.scroll]}>
+            <View style={{margin: 5, marginTop: 0}}>
+            <Text style={{marginBottom:7,fontWeight:"bold",color:"white",fontSize:25}}>BollyWood</Text>
+
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {images?.map(image2 => {
+                  return (
+                    <>
+                      <TouchableOpacity
+                        onPress={() => alert(image2.name)}
+                        style={{paddingHorizontal: 2, paddingVertical: 2}}>
+                        <View key={image2.name}>
+                          <Image
+                            source={{
+                              uri: image2.url,
+                            }}
+                            style={{width: 105, height: 145, borderRadius: 5}}
+                          />
+                          <Text style={[styles.imgname]}>{image2.name}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    </>
+                  );
+                })}
+              </ScrollView>
+            </View>
+          </View>
         </View>
+        
         <View style={[styles.button]}>
           <Button
             onPress={() => navigation.navigate('Notifications')}
